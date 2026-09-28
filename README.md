@@ -4,6 +4,7 @@ This tutorial records GCMC workflow on macOS: adapting Widom inputs, calculating
 
 **These are preliminary simulations over 0.1–1 bar, not an isotherm covering saturation or a validated reproduction of the published research.**
 
+![Ethane adsorption in ZIF-8 at 303 K](ethane_isotherm.png)
 The figure above shows a Python/Matplotlib plot of the four short runs; the 0.5 bar data point has not been updated to the longer-run result.
 
 ## 1. Objective
@@ -37,10 +38,10 @@ RASPA/
     └── P_0.5bar_long/
 ```
 
-First create `P_0.1bar` in Finder. Download the following five files from the original project and create a plain-text `simulation.input` in the same folder:
+First create `P_0.1bar` in Finder. Download the following five files and create a plain-text `simulation.input` in the same folder:
 
 | File |
-| --- | --- |
+| --- |
 | `ZIF_08.cif` |
 | `ethane.def` |
 | `pseudo_atoms.def` |
@@ -159,7 +160,7 @@ These values were checked against the complete local outputs. Error estimates ar
 | 0.5 | 1.0999474480 | 0.0435223571 |
 | 1.0 | 2.0705703488 | 0.0317378951 |
 
-Data file: [results/isotherm_short.csv](results/isotherm_short.csv).
+Data file: [isotherm_short.csv](isotherm_short.csv).
 
 Uptake increases with pressure without a clear saturation plateau. The earlier Widom coefficient of 2.27757 mol/(kg·bar) gives a linear estimate of 0.227757 mmol/g at 0.1 bar, close to the GCMC value of 0.233793 mmol/g. This is only a low-pressure consistency check.
 
@@ -205,6 +206,6 @@ This means 50,000 initialization cycles followed by 100,000 production cycles, t
 | First long run | 1.1147051010 | 0.0051439116 | Screenshot only; output overwritten by rerun |
 | Latest long run | 1.1116739354 | 0.0057693073 | Complete output |
 
-Data file: [results/convergence_0.5bar.csv](results/convergence_0.5bar.csv).
+Data file: [convergence_0.5bar.csv](convergence_0.5bar.csv).
 
 The latest long run has a relative reported error of approximately 0.52%; the two long-run means differ by approximately 0.27%. This supports preliminary repeatability, but a single-pressure check does not establish convergence of the entire isotherm. Random seeds were not recorded, so these runs are not a documented independent-replicate design.

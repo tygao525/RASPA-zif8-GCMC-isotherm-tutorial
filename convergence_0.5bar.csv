@@ -1,0 +1,4 @@
+run,pressure_bar,absolute_uptake_mmol_g,reported_error_mmol_g,initialization_cycles,production_cycles,record
+short,0.5,1.099947448,0.0435223571,5000,10000,complete_output
+long_first,0.5,1.114705101,0.0051439116,50000,100000,screenshot_only
+long_latest,0.5,1.1116739354,0.0057693073,50000,100000,complete_output

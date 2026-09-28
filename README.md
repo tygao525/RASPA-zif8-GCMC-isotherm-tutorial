@@ -4,8 +4,6 @@ This tutorial records GCMC workflow on macOS: adapting Widom inputs, calculating
 
 **These are preliminary simulations over 0.1–1 bar, not an isotherm covering saturation or a validated reproduction of the published research.**
 
-![Ethane adsorption in ZIF-8 at 303 K](figures/ethane_isotherm.png)
-
 The figure above shows a Python/Matplotlib plot of the four short runs; the 0.5 bar data point has not been updated to the longer-run result.
 
 ## 1. Objective
@@ -27,14 +25,7 @@ At a fixed temperature, vary the gas-reservoir pressure and measure the mean eth
 
 Monte Carlo cycles do not represent physical time. `Movies` saves sampled configurations, not a molecular dynamics trajectory.
 
-## 2. Software and input sources
-
-- [RASPA2 官方仓库 / Official RASPA2 repository](https://github.com/iRASPA/RASPA2)
-- [配套结构和力场 / Structure and force-field inputs](https://github.com/siddharth-ravichandran/computational-adsorption-toolkit/tree/main/force_fields/widom_insertions/input)
-- [原项目 GCMC 模板 / Original GCMC template](https://github.com/siddharth-ravichandran/computational-adsorption-toolkit/blob/main/force_fields/GCMC_simulations/RASPA_simulation.input)
-- [原项目说明 / Original project documentation](https://github.com/siddharth-ravichandran/computational-adsorption-toolkit/tree/main/force_fields)
-
-## 3. Create a folder for each pressure
+## 2. Create a folder for each pressure
 
 ```text
 RASPA/
@@ -57,7 +48,7 @@ First create `P_0.1bar` in Finder. Download the following five files from the or
 | `force_field.def` |
 | `simulation.input` |
 
-## 4. Configure the first pressure point
+## 3. Configure the first pressure point
 
 Open `simulation.input` in VS Code, enter the following, and save.
 
@@ -105,7 +96,7 @@ Component 0 MoleculeName       ethane
 
 Move-probability parameters are relative selection weights, not direct percentages. Initialization helps the system approach equilibrium, but a specified cycle count does not guarantee equilibration.
 
-## 5. Activate the environment and run
+## 4. Activate the environment and run
 
 In every new terminal session, activate the environment and set the data directory. Confirm that the six input files are present, then execute each line:
 
@@ -123,7 +114,7 @@ simulate > run.log 2>&1
 
 It is normal to see no terminal output because it is redirected to `run.log`. The prompt returning means the process has exited; check the output to determine whether it succeeded.
 
-## 6. Check completion and uptake
+## 5. Check completion and uptake
 
 Open the pressure-specific `.data` file in `Output/System_0`. For 0.1 bar it is:
 
@@ -144,7 +135,7 @@ All four short runs and the latest long run at 0.5 bar reported normal completio
 
 Record **absolute uptake** consistently. `HeliumVoidFraction` was not set; identical excess and absolute values in the output do not establish physical equivalence. Before comparing with experiments, check the reported uptake convention and the relevant pore-volume definition.
 
-## 7. Extend to four pressures
+## 6. Extend to four pressures
 
 Create a separate folder for each new pressure. Copy only the six inputs, not old `Output`, `Movies`, or `Restart` folders. Change only `ExternalPressure`, retaining the same short-run settings.
 
@@ -157,7 +148,7 @@ Create a separate folder for each new pressure. Copy only the six inputs, not ol
 
 Replace the final folder in the `cd` command with the corresponding pressure folder.
 
-## 8. Four short-run results
+## 7. Four short-run results
 
 These values were checked against the complete local outputs. Error estimates are recorded as reported by RASPA, without relabeling them as standard deviations or standard errors.
 
@@ -172,7 +163,7 @@ Data file: [results/isotherm_short.csv](results/isotherm_short.csv).
 
 Uptake increases with pressure without a clear saturation plateau. The earlier Widom coefficient of 2.27757 mol/(kg·bar) gives a linear estimate of 0.227757 mmol/g at 0.1 bar, close to the GCMC value of 0.233793 mmol/g. This is only a low-pressure consistency check.
 
-## 9. Plot with Python
+## 8. Plot with Python
 
 Save the following as `plot_isotherm.py` and run it in a Python environment with Matplotlib installed; the RASPA2 environment need not be modified. Plot absolute uptake on the y-axis with errors in the same units.
 
@@ -197,7 +188,7 @@ fig.savefig("ethane_isotherm_short.png", dpi=300)
 plt.show()
 ```
 
-## 10. Longer sampling at 0.5 bar
+## 9. Longer sampling at 0.5 bar
 
 Create `P_0.5bar_long`, copy only the inputs, keep pressure at `50000` Pa, and change:
 
